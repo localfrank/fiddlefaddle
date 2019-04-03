@@ -1,0 +1,78 @@
+# Production docker configuration
+version: "3.7"
+
+services:
+  app:
+    container_name: flaskapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Docker Compose will automatically pick up the contents of a .env file that you put into the directory where you run Docker compose.
+        - PYTHON_VERSION=${PYTHON_VERSION}
+    image: ${DOCKER_USER}/flaskapp:${APP_VERSION} # Image name
+    #Use env_file to pass environment variables
+    # env_file: .env.txt
+    environment:
+      - Flask_ENV=development
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+    depends_on:
+      - mariadb
+      - mongodb
+      - nginx
+
+  nginx:
+    container_name: nginx
+    image: nginx:${NGINX_VERSION}
+    ports:
+      - 9090:80
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - mariadb
+      - mongodb
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb:${MARIADB_VERSION}
+    ports:
+      - 3308:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - backend
+    volumes:
+      - /home/frank/docker_env/mariadb/data:/var/lib/mysql
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:${MONGODB_VERSION}
+    ports:
+      # host port:container port
+      - 27018:27017
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_DATABASE_USERNAME: ${MONGO_DATABASE_USERNAME}
+      MONGO_DATABASE_PASSWORD: ${MONGO_DATABASE_PASSWORD}
+    networks:
+      - backend
+    volumes:
+      - /home/frank/docker_env/mongo/data:/data/db
+      - ./configs/mongo/:/docker-entrypoint-initdb.d
+
+# Containers on this network can refer each other by service name
+networks:
+  frontend:
+  backend:
