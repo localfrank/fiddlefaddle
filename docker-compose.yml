@@ -15,20 +15,10 @@ services:
     # env_file: .env.txt
     environment:
       - Flask_ENV=development
+    volumes:
+      - .:/app
     ports:
       - 5000:5000
-    networks:
-      - backend
-    depends_on:
-      - mariadb
-      - mongodb
-      - nginx
-
-  nginx:
-    container_name: nginx
-    image: nginx:${NGINX_VERSION}
-    ports:
-      - 9090:80
     networks:
       - frontend
       - backend

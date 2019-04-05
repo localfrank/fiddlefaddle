@@ -1,0 +1,5 @@
+{
+    "SECRET_KEY": "f9bf78b9a18ce6d46a0cd2b0b86df9da",
+    "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://root:root@mariadb/fiddlefaddle?charset=utf8",
+    "MONGO_URI": "mongodb://devone:devone@mongodb/fiddlefaddle"
+}

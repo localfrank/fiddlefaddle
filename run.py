@@ -1,4 +1,4 @@
-from chatterbox import create_app
+from dashboard import create_app
 
 app = create_app()
 
