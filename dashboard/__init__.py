@@ -24,6 +24,8 @@ def create_app(config_class=Config):
     app.register_blueprint(user)
     from dashboard.project.routes import project
     app.register_blueprint(project)
+    from dashboard.expense.routes import expense
+    app.register_blueprint(expense)
 
     # from dashboard.api.routes import api
     # app.register_blueprint(api)

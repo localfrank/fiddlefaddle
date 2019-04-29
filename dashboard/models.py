@@ -9,6 +9,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     public_id = db.Column(db.String(50), unique=True, nullable=False)
     username = db.Column(db.String(50), unique=True, nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     admin = db.Column(db.Boolean, default=False, nullable=False)
@@ -36,63 +38,63 @@ class Bot(db.Model):
         return "Bot({}, {}, {})".format(self.name, self.description, self.active)
 
 
-class Department(db.Model):
-    '''Departments'''
-    __table__ = 'department'
-    id = db.Column(db.Integer, primary_key=True)
-    department_id = db.Column(db.String(10), unique=True, nullable=False)
-    department_name = db.Column(db.String(20), unique=True, nullable=False)
+# class Department(db.Model):
+#     '''Departments'''
+#     __table__ = 'department'
+#     id = db.Column(db.Integer, primary_key=True)
+#     department_id = db.Column(db.String(10), unique=True, nullable=False)
+#     department_name = db.Column(db.String(20), unique=True, nullable=False)
 
 
-class Project(db.Model):
-    '''Project'''
-    __table__ = 'project'
-    id = db.Column(db.Integer, primary_key=True)
-    project_id = db.Column(db.String(10), unique=True, nullable=False)
-    project_name = db.Column(db.String(20), unique=True, nullable=False)
-    client = db.Column(db.String(120), nullable=False)
-    stage = db.Column(db.String(20), nullable=False)
+# class Project(db.Model):
+#     '''Project'''
+#     __table__ = 'project'
+#     id = db.Column(db.Integer, primary_key=True)
+#     project_id = db.Column(db.String(10), unique=True, nullable=False)
+#     project_name = db.Column(db.String(20), unique=True, nullable=False)
+#     client = db.Column(db.String(120), nullable=False)
+#     stage = db.Column(db.String(20), nullable=False)
 
 
-class Role(db.Model):
-    '''Role: Engagement manager, BA, developer etc'''
-    __table__ = 'role'
-    id = db.Column(db.Integer, primary_key=True)
-    role_id = db.Column(db.String(10), unique=True, nullable=False)
-    role_name = db.Column(db.String(20), unique=True, nullable=False)
+# class Role(db.Model):
+#     '''Role: Engagement manager, BA, developer etc'''
+#     __table__ = 'role'
+#     id = db.Column(db.Integer, primary_key=True)
+#     role_id = db.Column(db.String(10), unique=True, nullable=False)
+#     role_name = db.Column(db.String(20), unique=True, nullable=False)
 
 
-class Stage(db.Model):
-    '''Stage of the project: Interest, RPF, Ongoing ...'''
-    __table__ = 'stage'
-    id = db.Column(db.Integer, primary_key=True)
-    stage_id = db.Column(db.String(10), unique=True, nullable=False)
-    stage_name = db.Column(db.String(20), unique=True, nullable=False)
+# class Stage(db.Model):
+#     '''Stage of the project: Interest, RPF, Ongoing ...'''
+#     __table__ = 'stage'
+#     id = db.Column(db.Integer, primary_key=True)
+#     stage_id = db.Column(db.String(10), unique=True, nullable=False)
+#     stage_name = db.Column(db.String(20), unique=True, nullable=False)
 
 
-class Client(db.Model):
-    '''Client table'''
-    __table__ = 'client'
-    id = db.Column(db.Integer, primary_key=True)
-    client_id = db.Column(db.String(10), unique=True, nullable=False)
-    client_name = db.Column(db.String(20), unique=True, nullable=False)
-    description = db.Column(db.Text, nullable=True)
+# class Client(db.Model):
+#     '''Client table'''
+#     __table__ = 'client'
+#     id = db.Column(db.Integer, primary_key=True)
+#     client_id = db.Column(db.String(10), unique=True, nullable=False)
+#     client_name = db.Column(db.String(20), unique=True, nullable=False)
+#     description = db.Column(db.Text, nullable=True)
 
 
-class Task(db.Model):
-    '''Task table: billable or non-billable'''
-    __table__ = 'task'
-    id = db.Column(db.Integer, primary_key=True)
-    task_id = db.Column(db.String(10), unique=True, nullable=False)
-    task_name = db.Column(db.String(20), unique=True, nullable=False)
+# class Task(db.Model):
+#     '''Task table: billable or non-billable'''
+#     __table__ = 'task'
+#     id = db.Column(db.Integer, primary_key=True)
+#     task_id = db.Column(db.String(10), unique=True, nullable=False)
+#     task_name = db.Column(db.String(20), unique=True, nullable=False)
 
 
-class Expense_Approval_Status(db.Model):
-    ''' Expense approval status: Open, Not submitted, Received, Rejected, Approved etc'''
-    __table__ = 'expense_approval_status'
-    id = db.Column(db.Integer, primary_key=True)
-    status_id = db.Column(db.String(10), unique=True, nullable=False)
-    status_name = db.Column(db.String(20), unique=True, nullable=False)
+# class Expense_Approval_Status(db.Model):
+#     ''' Expense approval status: Open, Not submitted, Received, Rejected, Approved etc'''
+#     __table__ = 'expense_approval_status'
+#     id = db.Column(db.Integer, primary_key=True)
+#     status_id = db.Column(db.String(10), unique=True, nullable=False)
+#     status_name = db.Column(db.String(20), unique=True, nullable=False)
 
 # TODO
 # class Expense(db.Model):
